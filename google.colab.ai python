@@ -1,0 +1,18 @@
+import speech_recognition as sr
+
+# Initialize recognizer
+recognizer = sr.Recognizer()
+
+# Use microphone as source
+with sr.Microphone() as source:
+    print("🎤 Say something...")
+    audio = recognizer.listen(source)
+
+    try:
+        # Recognize speech using Google's API
+        text = recognizer.recognize_google(audio)
+        print("📝 Transcribed Text: " + text)
+    except sr.UnknownValueError:
+        print("❌ Could not understand the audio.")
+    except sr.RequestError:
+        print("⚠️ Could not request results from Google API.")
